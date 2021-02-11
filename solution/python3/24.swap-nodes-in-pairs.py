@@ -14,21 +14,17 @@ class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
         dummy = ListNode()
 
-        count = 1
-        prev = None
         current = dummy
         while head:
-            if count % 2 == 0:
-                current.next = ListNode(head.val)
-                current.next.next = ListNode(prev.val)
+            if head.next:
+                current.next = ListNode(head.next.val)
+                current.next.next = ListNode(head.val)
                 current = current.next.next
-            prev = head
-            print(head.val)
-            head = head.next
-            count += 1
+                head = head.next.next
+            else:
+                current.next = ListNode(head.val)
+                break
 
-        if count % 2 == 0:
-            current.next = ListNode(prev.val)
         return dummy.next
 
 # @lc code=end
