@@ -5,20 +5,20 @@
 #
 
 # @lc code=start
+import heapq
 class KthLargest:
-    k = -1
-    stream = -1
-
     def __init__(self, k: int, nums: List[int]):
-        tmp = sorted(nums)
-        self.stream = tmp[-k:]
         self.k = k
+        self.heap = []
+        for n in nums:
+            self.add(n)
 
     def add(self, val: int) -> int:
-        tmp = self.stream[:]
-        tmp.append(val)
-        self.stream = sorted(tmp)[-self.k:]
-        return self.stream[0]
+        heapq.heappush(self.heap, val)
+        if len(self.heap) > self.k:
+            heapq.heappop(self.heap)
+        return self.heap[0]
+
 
 # Your KthLargest object will be instantiated and called as such:
 # obj = KthLargest(k, nums)
