@@ -11,23 +11,19 @@ class Solution:
         d = {}
         for s in strs:
             if not len(s) in d:
-                d[len(s)] = {}
+                d[len(s)] = []
 
-            if s[0] in d[len(s)]:
-                d[len(s)][s[0]].append(s)
-            else:
-                d[len(s)][s[0]] = [s]
+            d[len(s)].append(s)
 
         ans = []
         for s in strs:
-            words = d[len(s)]
             group = []
-            for c in s:
-                tmp = words[c][:]
-                for word in tmp:
-                    if Counter(s) == Counter(word):
-                        words[c].remove(s)
-                        group.append(s)
-            ans.append(group)
+            tmp = d[len(s)][:]
+            for word in tmp:
+                if ''.join(sorted(s)) == ''.join(sorted(word)):
+                    d[len(s)].remove(word)
+                    group.append(word)
+            if len(group) != 0:
+                ans.append(group)
         return ans
 # @lc code=end
