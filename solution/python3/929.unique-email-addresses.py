@@ -5,6 +5,7 @@
 #
 
 # @lc code=start
+import collections
 class Solution:
     def numUniqueEmails(self, emails: List[str]) -> int:
         note = collections.defaultdict(set)
