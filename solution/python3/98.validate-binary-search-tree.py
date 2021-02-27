@@ -13,27 +13,25 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
-        isValid = True
-        if root:
-            if root.left:
-                isValid = isValid and root.left.val < root.val
-            if root.right:
-                isValid = isValid and root.val < root.right.val
+        result = self.search(root)
+        return result[0]
 
-            return isValid and self.isValidBST(root.left) and self.isValidBST(root.right)
-        else:
-            return isValid
-
-    def search(self, root, minVal, maxVal):
+    def search(self, root):
+        minVal = root.val
+        maxVal = root.val
         isValid = True
-        if root:
-            if root.left:
-                l = self.search(root.left, minVal, maxVal)
-                isValid = isValid and l[0] and l[2] < root.val and root.val < l[1]
-            if root.right:
-                l = self.search(root.right, minVal, maxVal)
-                isValid = isValid and l[0] and l[2] < root.val and root.val < l[1]
-        else:
-            return (isValid, minVal, maxVal)
+        if root.left:
+            l = self.search(root.left)
+            isValid = isValid and l[0] and l[2] < root.val
+            minVal = min(minVal, l[1])
+            maxVal = max(maxVal, l[2])
+
+        if root.right:
+            r = self.search(root.right)
+            isValid = isValid and r[0] and root.val < r[1]
+            minVal = min(minVal, r[1])
+            maxVal = max(maxVal, r[2])
+
+        return (isValid, minVal, maxVal)
 # @lc code=end
 
