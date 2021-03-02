@@ -11,8 +11,7 @@ class Solution:
         for i in range(1, len(nums)):
             ruiseki += nums[i]
             maxSum = max(ruiseki, ruiseki - minSum, maxSum)
-            if minSum > ruiseki:
-                minSum = ruiseki
+            minSum = min(ruiseki, minSum)
 
         return maxSum
 # @lc code=end
