@@ -7,11 +7,12 @@
 # @lc code=start
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        ruiseki = [nums[0]]
-        maxSum = nums[0]
+        ruiseki = maxSum = minSum = nums[0]
         for i in range(1, len(nums)):
-            ruiseki.append(ruiseki[i-1] + nums[i])
-            maxSum = max(ruiseki[i], ruiseki[i] - min(ruiseki[:i]), maxSum)
+            ruiseki += nums[i]
+            maxSum = max(ruiseki, ruiseki - minSum, maxSum)
+            if minSum > ruiseki:
+                minSum = ruiseki
 
         return maxSum
 # @lc code=end
