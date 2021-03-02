@@ -11,10 +11,7 @@ class Solution:
         maxSum = nums[0]
         for i in range(1, len(nums)):
             ruiseki.append(ruiseki[i-1] + nums[i])
-            maxSum = ruiseki[i] if ruiseki[i] > maxSum else maxSum
-            for j in range(i):
-                if ruiseki[i] - ruiseki[j] > maxSum:
-                    maxSum = ruiseki[i] - ruiseki[j]
+            maxSum = max(ruiseki[i], ruiseki[i] - min(ruiseki[:i]), maxSum)
 
         return maxSum
 # @lc code=end
