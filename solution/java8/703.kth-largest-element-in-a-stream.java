@@ -24,7 +24,6 @@ class KthLargest {
         if (this.queue.size() > this.k) {
             this.queue.poll();
         }
-        System.out.println(this.queue);
         return this.queue.peek();
     }
 }
